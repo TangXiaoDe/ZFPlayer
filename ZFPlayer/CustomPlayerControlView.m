@@ -71,8 +71,6 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 @property (nonatomic, strong) UIButton                *closeBtn;
 /** 重播按钮 */
 @property (nonatomic, strong) UIButton                *repeatBtn;
-/** 分享按钮 */
-@property (nonatomic, strong) UIButton                *shareBtn;
 /** 重播标签 */
 @property (nonatomic, strong) UILabel                *repeatLabel;
 /** 分享标签 */
@@ -145,12 +143,11 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
         [self.topImageView addSubview:self.backBtn];
         [self addSubview:self.activity];
         [self addSubview:self.repeatBtn];
-        [self addSubview:self.shareBtn];
         [self addSubview:self.repeatLabel];
         [self addSubview:self.shareLabel];
         [self addSubview:self.failBtn];
         [self addSubview:self.failLabel];
-
+        
         [self addSubview:self.fastView];
         [self.fastView addSubview:self.fastImageView];
         [self.fastView addSubview:self.fastTimeLabel];
@@ -227,12 +224,12 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
         make.leading.trailing.mas_equalTo(0);
         make.height.mas_equalTo(50);
     }];
-
+    
     [self.startBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.mas_equalTo(40);
         make.center.equalTo(self);
     }];
-
+    
     [self.currentTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.bottomImageView.mas_leading).offset(15);
         make.centerY.equalTo(self.bottomImageView);
@@ -245,48 +242,35 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
         make.trailing.equalTo(self.bottomImageView.mas_trailing);
         make.centerY.equalTo(self.bottomImageView);
     }];
-
+    
     [self.totalTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.equalTo(self.fullScreenBtn.mas_leading).offset(0);
         make.centerY.equalTo(self.bottomImageView);
         make.width.mas_equalTo(43);
     }];
-
+    
     [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.currentTimeLabel.mas_trailing).offset(12);
         make.trailing.equalTo(self.totalTimeLabel.mas_leading).offset(-12);
         make.centerY.equalTo(self.bottomImageView);
     }];
-
+    
     [self.videoSlider mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.currentTimeLabel.mas_trailing).offset(12);
         make.trailing.equalTo(self.totalTimeLabel.mas_leading).offset(-12);
         make.centerY.equalTo(self.bottomImageView).offset(-1);
         make.height.mas_equalTo(30);
     }];
-
+    
     [self.repeatBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_centerY).offset(-40);
-        make.right.equalTo(self.mas_centerX).offset(-30);
+        make.centerX.equalTo(self);
         make.width.height.mas_equalTo(55);
     }];
-
-    [self.shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_centerY).offset(-40);
-        make.left.equalTo(self.mas_centerX).offset(30);
-        make.width.height.mas_equalTo(55);
-    }];
-
+    
     [self.repeatLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.repeatBtn.mas_bottom).offset(15);
         make.centerX.equalTo(self.repeatBtn);
-        make.height.mas_equalTo(13);
-        make.width.mas_equalTo(55);
-    }];
-
-    [self.shareLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.shareBtn.mas_bottom).offset(15);
-        make.centerX.equalTo(self.shareBtn);
         make.height.mas_equalTo(13);
         make.width.mas_equalTo(55);
     }];
@@ -309,7 +293,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
         make.width.equalTo(self);
         make.height.mas_equalTo(15);
     }];
-
+    
     [self.fastImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_offset(32);
         make.height.mas_offset(32);
@@ -432,10 +416,6 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     }
 }
 
-- (void)shareBtnClick:(UIButton *)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"didClickShortVideoShareBtn" object:nil];
-}
-
 - (void)downloadBtnClick:(UIButton *)sender {
     if ([self.zfDelegate respondsToSelector:@selector(zf_controlView:downloadVideoAction:)]) {
         [self.zfDelegate zf_controlView:self downloadVideoAction:sender];
@@ -500,7 +480,6 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 - (void)playerPlayDidEnd {
     self.backgroundColor  = RGBA(0, 0, 0, .6);
     self.repeatBtn.hidden = NO;
-    self.shareBtn.hidden = NO;
     self.repeatLabel.hidden = NO;
     if ([self currentIsFullScreen] == YES) {
         self.topImageView.hidden = NO;
@@ -542,7 +521,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
         make.leading.equalTo(self.topImageView.mas_leading).offset(10);
         make.width.height.mas_equalTo(40);
     }];
-
+    
     [self.bottomImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         if (self.fullScreen == YES) {
             make.bottom.mas_equalTo(iPhoneX ? -34 : 0);
@@ -565,7 +544,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
         make.leading.equalTo(self.topImageView.mas_leading).offset(10);
         make.width.height.mas_equalTo(40);
     }];
-
+    
     [self.bottomImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         if (self.fullScreen == YES) {
             make.bottom.mas_equalTo(iPhoneX ? -34 : 0);
@@ -730,7 +709,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
         _videoSlider.maximumValue          = 1;
         _videoSlider.minimumTrackTintColor = RGBA(89, 182, 215, 1);
         _videoSlider.maximumTrackTintColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
-
+        
         // slider开始滑动事件
         [_videoSlider addTarget:self action:@selector(progressSliderTouchBegan:) forControlEvents:UIControlEventTouchDown];
         // slider滑动中事件
@@ -789,15 +768,6 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
         [_repeatBtn addTarget:self action:@selector(repeatBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _repeatBtn;
-}
-
-- (UIButton *)shareBtn {
-    if (!_shareBtn) {
-        _shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_shareBtn setImage:ZFPlayerImage(@"ico_video_share") forState:UIControlStateNormal];
-        [_shareBtn addTarget:self action:@selector(shareBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _shareBtn;
 }
 
 - (UILabel *)repeatLabel {
@@ -939,7 +909,6 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     self.totalTimeLabel.text         = @"00:00";
     self.fastView.hidden             = YES;
     self.repeatBtn.hidden            = YES;
-    self.shareBtn.hidden = YES;
     self.repeatLabel.hidden = YES;
     self.shareLabel.hidden = YES;
     self.resolutionView.hidden       = YES;
@@ -957,7 +926,6 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 - (void)zf_playerResetControlViewForResolution {
     self.fastView.hidden        = YES;
     self.repeatBtn.hidden       = YES;
-    self.shareBtn.hidden = YES;
     self.repeatLabel.hidden = YES;
     self.shareLabel.hidden = YES;
     self.resolutionView.hidden  = YES;
@@ -980,7 +948,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 
 /** 设置播放模型 */
 - (void)zf_playerModel:(ZFPlayerModel *)playerModel {
-
+    
     // 设置网络占位图片
     if (playerModel.placeholderImageURLString) {
         [self.placeholderImageView setImageWithURLString:playerModel.placeholderImageURLString placeholder:ZFPlayerImage(@"ZFPlayer_loading_bgView")];
@@ -1146,7 +1114,6 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 /** 播放完了 */
 - (void)zf_playerPlayEnd {
     self.repeatBtn.hidden = NO;
-    self.shareBtn.hidden = NO;
     self.repeatLabel.hidden = NO;
     self.shareLabel.hidden = NO;
     self.playeEnd         = YES;
