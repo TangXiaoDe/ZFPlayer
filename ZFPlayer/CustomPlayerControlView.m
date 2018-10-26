@@ -1136,7 +1136,8 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
  是否有下载功能
  */
 - (void)zf_playerHasDownloadFunction:(BOOL)sender {
-    self.downLoadBtn.hidden = !sender;
+    //self.downLoadBtn.hidden = !sender;
+    self.downLoadBtn.hidden = YES;
 }
 
 /**
