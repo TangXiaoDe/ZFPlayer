@@ -59,8 +59,8 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 @property (nonatomic, strong) UILabel                 *totalTimeLabel;
 /** 缓冲进度条 */
 @property (nonatomic, strong) UIProgressView          *progressView;
-/** 滑杆 */
-@property (nonatomic, strong) ASValueTrackingSlider   *videoSlider;
+///** 滑杆 */
+//@property (nonatomic, strong) ASValueTrackingSlider   *videoSlider;
 /** 全屏按钮 */
 @property (nonatomic, strong) UIButton                *fullScreenBtn;
 /** 系统菊花 */

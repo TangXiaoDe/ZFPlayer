@@ -11,4 +11,7 @@
 
 @interface CustomPlayerControlView : UIView
 
+/** 滑杆 */
+@property (nonatomic, strong) ASValueTrackingSlider   *videoSlider;
+    
 @end
