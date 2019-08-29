@@ -1017,6 +1017,13 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     self.shrink    = NO;
 }
 
+/**
+ * 返回按钮显示状态
+ */
+- (void)zf_setBackBtnHidden:(BOOL)hidden {
+    [self.backBtn setHidden:hidden];
+}
+
 - (void)zf_playerCurrentTime:(NSInteger)currentTime totalTime:(NSInteger)totalTime sliderValue:(CGFloat)value {
     // 当前时长进度progress
     NSInteger proMin = currentTime / 60;//当前秒

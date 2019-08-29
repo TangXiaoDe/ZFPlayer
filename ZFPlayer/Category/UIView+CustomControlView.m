@@ -156,4 +156,9 @@
  */
 - (void)zf_playerCellPlay {}
 
+/**
+ * 隐藏返回按钮
+ */
+- (void)zf_setBackBtnHidden:(BOOL)hidden {}
+
 @end

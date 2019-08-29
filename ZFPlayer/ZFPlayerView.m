@@ -1501,7 +1501,11 @@ typedef NS_ENUM(NSInteger, PanDirection){
 
 - (void)setFullScreenPlay:(BOOL)fullScreenPlay {
     _fullScreenPlay = fullScreenPlay;
-    if (fullScreenPlay) [self _fullScreenAction];
+    if (fullScreenPlay) {
+        [self _fullScreenAction];
+        [self play];
+        [self.controlView zf_setBackBtnHidden:false];
+    }
 }
 
 #pragma mark - Getter
