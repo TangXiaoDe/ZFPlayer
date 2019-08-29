@@ -1542,6 +1542,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
         [self play];
         if (self.state == ZFPlayerStatePause) { self.state = ZFPlayerStatePlaying; }
     }
+    [self.controlView zf_playerShowControlView];
     
     if (!self.isAutoPlay) {
         self.isAutoPlay = YES;
@@ -1586,6 +1587,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
 
 - (void)zf_controlView:(UIView *)controlView cneterPlayAction:(UIButton *)sender {
     [self configZFPlayer];
+    [self.controlView zf_playerShowControlView];
 }
 
 - (void)zf_controlView:(UIView *)controlView repeatPlayAction:(UIButton *)sender {
