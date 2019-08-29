@@ -539,10 +539,10 @@ typedef NS_ENUM(NSInteger, PanDirection){
 /**
  兼容iPhoneX的NavBaf顶部高度 （statusHeight）
 
- @return iPhoneX：44 other:20
+ @return iPhoneXseries：44 other:20
  */
 + (CGFloat )getNavBarTopHeight {
-    if (ScreenWidth == 375 && ScreenHeight == 812) {
+    if (iPhoneXseries) {
         return 44;
     }
     return 20;
