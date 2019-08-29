@@ -401,7 +401,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     sender.selected = !sender.selected;
     self.fullScreen = sender.selected;
     self.backBtn.hidden = !self.fullScreen;
-    self.topImageView.hidden = !self.fullScreen;
+//    self.topImageView.hidden = !self.fullScreen;
     if ([self.zfDelegate respondsToSelector:@selector(zf_controlView:fullScreenAction:)]) {
         [self.zfDelegate zf_controlView:self fullScreenAction:sender];
     }
@@ -482,10 +482,10 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     self.repeatBtn.hidden = NO;
     self.repeatLabel.hidden = NO;
     if ([self currentIsFullScreen] == YES) {
-        self.topImageView.hidden = NO;
+//        self.topImageView.hidden = NO;
         self.backBtn.hidden = NO;
     } else {
-        self.topImageView.hidden = YES;
+//        self.topImageView.hidden = YES;
         self.backBtn.hidden = YES;
     }
     // 初始化显示controlView为YES
@@ -513,7 +513,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
         self.shrink             = NO;
     }
     self.backBtn.hidden = NO;
-    self.topImageView.hidden = NO;
+//    self.topImageView.hidden = NO;
     self.fullScreenBtn.selected = [self currentIsFullScreen];
     [self.backBtn setImage:ZFPlayerImage(@"ZFPlayer_back_full") forState:UIControlStateNormal];
     [self.backBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -572,7 +572,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
         self.shrink                = NO;
     }
     ZFPlayerShared.isStatusBarHidden = NO;
-    self.topImageView.hidden = !self.fullScreen;
+//    self.topImageView.hidden = !self.fullScreen;
     self.backBtn.hidden = !self.fullScreen;
 }
 
@@ -1119,10 +1119,10 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     self.playeEnd         = YES;
     self.showing          = NO;
     if ([self currentIsFullScreen] == YES) {
-        self.topImageView.hidden = NO;
+//        self.topImageView.hidden = NO;
         self.backBtn.hidden = NO;
     } else {
-        self.topImageView.hidden = YES;
+//        self.topImageView.hidden = YES;
         self.backBtn.hidden = YES;
     }
     NSLog([NSString stringWithFormat:@"zf_playerPlayEnd - %d", self.backBtn.isHidden]);
